@@ -1,0 +1,10 @@
+To create multi company views, you should have a reporting database for each NAV database.
+For example:
+NAVDatabase     ReportingDatabase
+-------------   -----------------
+NAVCronusProd   NAVReportingProd
+NAVCronusTest   NAVReportingTest
+NAVCronusDev    NAVReportingDev
+
+After your databases are setup, you should execute the scripts in the order they are listed in 
+this folder.
