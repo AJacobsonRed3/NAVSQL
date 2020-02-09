@@ -5,14 +5,24 @@
 /* Step 1 - Create a list of all Tables you will be reporting over.
     While NAV has hundreds of tables, you will probably not need the vast majority for reporting.
     */
+/* Changes
+2020-02-09  Added Column to allow this program to create views for tables with only one copy per database (as opposed to one copy per company)
+*/
+IF OBJECT_ID('dbo.Tables') IS NOT NULL
+  DROP TABLE dbo.Tables
+GO
+
 CREATE TABLE [dbo].[Tables](
 	[NAVTableName] [NVARCHAR](128) NOT NULL,
+	[PerCompany] CHAR(1) NULL DEFAULT 'Y'
 PRIMARY KEY CLUSTERED 
 (
 	[NAVTableName] ASC
 )
 )
 /* Here's a list to get your started:
+  these are the Table which have one copy per company.
+*/
 INSERT INTO dbo.Tables
 (
     NAVTableName
@@ -64,4 +74,24 @@ VALUES
 ( N'Value Entry' ), 
 ( N'Vendor' ), 
 ( N'Vendor Ledger Entry' )
-
+GO
+INSERT INTO dbo.Tables
+(
+    NAVTableName,
+	PerCompany
+)
+VALUES
+('Access Control','N'),
+('Company','N'),
+('Object','N'),
+('Object Metadata','N'),
+('Permission','N'),
+('Permission Set','N'),
+('User','N'),
+('User Group','N'),
+('User Group Access Control','N'),
+('User Group Member','N'),
+('User Group Permission Set','N'),
+('User Metadata','N'),
+('User Personalization','N')
+go
